@@ -1,4 +1,4 @@
-# micrograd-from-scratch
+# Micrograd
 
 A tiny scalar-valued automatic differentiation engine and a small neural network
 library built on top of it - implemented from scratch to understand how
