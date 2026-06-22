@@ -8,8 +8,7 @@ This was built as a learning project, following along with and then re-deriving
 the ideas from [Andrej Karpathy](https://github.com/karpathy)'s excellent
 [micrograd](https://github.com/karpathy/micrograd) and his
 [Neural Networks: Zero to Hero](https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ)
-series. Every line here was typed and reasoned through by hand, not copy-pasted -
-the goal was understanding, not just a working result. Huge thanks to Andrej for
+series. Huge thanks to Andrej for
 making this material so clear and freely available.
 
 ## What's inside
