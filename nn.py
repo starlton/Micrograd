@@ -1,15 +1,3 @@
-"""
-nn.py - A minimal neural network library built on top of the Value autograd engine.
-
-The architecture is a nesting doll, and none of these classes contain any gradient
-logic of their own - they simply organize Value objects into a trainable structure.
-The engine underneath does all the differentiation.
-
-    MLP    = a list of Layers   (the full network)
-    Layer  = a list of Neurons  (neurons sharing one input)
-    Neuron = weights + bias      (the smallest unit: activation(w . x + b))
-"""
-
 import random
 from engine import Value
 
@@ -87,7 +75,6 @@ class MLP(Module):
 
     def __init__(self, n_inputs, layer_sizes, activation="tanh"):
         # Full list of sizes: input count followed by each layer's neuron count.
-        # e.g. MLP(2, [4, 4, 1]) -> sizes = [2, 4, 4, 1]
         sizes = [n_inputs] + layer_sizes
 
         # One layer between each consecutive pair of sizes. The last layer is
