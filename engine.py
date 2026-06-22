@@ -1,18 +1,3 @@
-"""
-engine.py - A tiny scalar-valued automatic differentiation engine.
-
-The Value class wraps a single number and records how it was computed, so that
-calling .backward() can walk the computation graph in reverse and fill in the
-gradient of the final output with respect to every Value that contributed to it.
-
-The one idea behind every operation below:
-
-    each operation's _backward does:  input.grad += (local derivative) * out.grad
-
-That single pattern - local derivative times the incoming gradient - is the
-chain rule, and it is the entire mechanism of backpropagation.
-"""
-
 import math
 
 
@@ -36,7 +21,6 @@ class Value:
 
         def _backward():
             # Addition passes gradient straight through (local derivative = 1).
-            # += accumulates, so a value used in multiple places sums its contributions.
             self.grad += out.grad
             other.grad += out.grad
 
@@ -95,15 +79,11 @@ class Value:
         return out
 
     def __neg__(self):
-        # -self is just self * -1, reusing __mul__ (gradient handled for free).
         return self * -1
 
     def __sub__(self, other):
-        # a - b is a + (-b), reusing __add__ and __neg__.
         return self + (-other)
-
-    # Reverse-operator hooks so raw numbers on the LEFT also work,
-    # e.g. `1 - Value(2)` calls __rsub__, `2 * Value(3)` calls __rmul__.
+        
     def __rsub__(self, other):
         return other + (-self)
 
@@ -117,8 +97,7 @@ class Value:
         out = Value(math.tanh(self.data), _children=(self,))
 
         def _backward():
-            # d/dx tanh(x) = 1 - tanh(x)**2. Since out.data IS tanh(x),
-            # the whole local derivative is computable from the output alone.
+            # d/dx tanh(x) = 1 - tanh(x)**2. 
             self.grad += (1 - out.data ** 2) * out.grad
 
         out._backward = _backward
