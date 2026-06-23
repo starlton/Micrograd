@@ -93,6 +93,9 @@ class Value:
     def __rmul__(self, other):
         return self * other
 
+
+    # ---- Activation Functions ----
+
     def tanh(self):
         out = Value(math.tanh(self.data), _children=(self,))
 
